@@ -15,16 +15,28 @@ public class ApproachDateComparator implements Comparator<JSONObject> {
         ArrayList<JSONObject> approachDataList1 = new ArrayList<JSONObject>();
         ArrayList<JSONObject> approachDataList2 = new ArrayList<JSONObject>();
 
+        for (int i = 0; i < approachData1.size(); i++) {
+            approachDataList1.add((JSONObject) approachData1.get(i));
+        }
+        for (int i = 0; i < approachData2.size(); i++) {
+            approachDataList2.add((JSONObject) approachData2.get(i));
+        }
         // Since NASA also retruns past NEOs, we need to find the closest in the FUTURE..
         Long v1 = Long.MAX_VALUE, v2 = Long.MAX_VALUE;
         for (int i = 0; i < approachDataList1.size(); i++) {
-            v1 = (Long) ((JSONObject) approachData1.get(i)).get("epoch_date_close_approach");
-            if (v1 > 0) break;
+            Long epochDate = (Long) ((JSONObject) approachData1.get(i)).get("epoch_date_close_approach");
+            if (epochDate > 0) {
+                v1 = epochDate;
+                break;
+            }
         }
 
         for (int i = 0; i < approachDataList2.size(); i++) {
-            v2 = (Long) ((JSONObject) approachData1.get(i)).get("epoch_date_close_approach");
-            if (v2 > 0) break;
+            Long epochDate = (Long) ((JSONObject) approachData2.get(i)).get("epoch_date_close_approach");
+            if (epochDate > 0) {
+                v2 = epochDate;
+                break;
+            }
         }
 
         return v1.compareTo(v2);

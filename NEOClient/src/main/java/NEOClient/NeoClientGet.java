@@ -42,7 +42,7 @@ public class NeoClientGet {
                 System.out.println("NEO closest to earth: " + (list.get(0).get("name")));
 
                 Collections.sort(list, new DiameterComparator());
-                System.out.println("NEO largest diameter: " + (list.get(0).get("name")));
+                System.out.println("NEO largest diameter: " + (list.get(list.size()-1).get("name")));
 
             } catch (Exception e) {
                 e.printStackTrace();
